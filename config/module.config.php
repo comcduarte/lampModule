@@ -41,7 +41,6 @@ return [
                     [
                         'label' => 'Create New Street Lamp',
                         'route' => 'streetlamp',
-                        'controller' => 'streetlamp',
                         'action' => 'create',
                     ],
                     [
