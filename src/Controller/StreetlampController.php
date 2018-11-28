@@ -1,9 +1,9 @@
 <?php 
 namespace Streetlamp\Controller;
 
-use Streetlamp\Model\StreetlampModel;
 use Midnet\Traits\AdapterTrait;
 use Streetlamp\Form\StreetlampForm;
+use Streetlamp\Model\StreetlampModel;
 use Zend\Mvc\Controller\AbstractActionController;
 
 class StreetlampController extends AbstractActionController
@@ -35,13 +35,18 @@ class StreetlampController extends AbstractActionController
                 $lamp->exchangeArray($form->getData());
                 $lamp->create();
                 
-                return $this->redirect()->toRoute('streetlamp');
+                return $this->redirect()->toRoute('streetlamp', ['action' => 'accept']);
             }
         }
         
         return [
             'form' => $form,
         ];
+    }
+    
+    public function acceptAction()
+    {
+        return ([]);
     }
     
     public function updateAction()

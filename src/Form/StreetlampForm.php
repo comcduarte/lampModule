@@ -12,6 +12,7 @@ use Zend\Db\Sql\Select as SqlSelect;
 use Midnet\Traits\AdapterTrait;
 use Zend\Form\Element\Select;
 use Zend\Stdlib\Exception\RuntimeException;
+use Zend\Form\Element\Textarea;
 
 class StreetlampForm extends Form
 {
@@ -91,7 +92,7 @@ class StreetlampForm extends Form
             ],
         ]);
         
-        $value_options = $this->getSelectValueOptions('actions','UUID','ACTION');
+        $value_options = $this->getSelectValueOptions('actions','ACTION','ACTION');
         
         $this->add([
             'name' => 'ACTION',
@@ -110,7 +111,7 @@ class StreetlampForm extends Form
         
         $this->add([
             'name' => 'DESCRIPTION',
-            'type' => Text::class,
+            'type' => Textarea::class,
             'attributes' => [
                 'class' => 'form-control',
                 'id' => 'DESCRIPTION',

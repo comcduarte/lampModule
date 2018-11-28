@@ -24,6 +24,14 @@ return [
             ],
         ],
     ],
+    'acl' => [
+        'guest' => [
+            'streetlamp' => ['create', 'accept'],
+        ],
+        'member' => [
+            'streetlamp' => ['index', 'create', 'update', 'delete'],
+        ],
+    ],
     'controllers' => [
         'factories' => [
             StreetlampController::class => StreetlampControllerFactory::class,
