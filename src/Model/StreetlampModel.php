@@ -16,7 +16,6 @@ class StreetlampModel extends DatabaseObject
     public $DESCRIPTION;
     public $PHONE_NUMBER;
     public $DATE_CREATED;
-//     public $DATE_MODIFIED;
     
     public function __construct($dbAdapter = null)
     {

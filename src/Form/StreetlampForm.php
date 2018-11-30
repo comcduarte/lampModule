@@ -42,7 +42,6 @@ class StreetlampForm extends Form
             'attributes' => [
                 'class' => 'form-control',
                 'id' => 'POLE_NUMBER',
-                'required' => 'true',
                 'placeholder' => '',
             ],
             'options' => [
@@ -56,7 +55,6 @@ class StreetlampForm extends Form
             'attributes' => [
                 'class' => 'form-control',
                 'id' => 'HOUSE_NUMBER',
-                'required' => 'true',
                 'placeholder' => '',
             ],
             'options' => [
@@ -88,7 +86,7 @@ class StreetlampForm extends Form
                 'placeholder' => '',
             ],
             'options' => [
-                'label' => 'Intersecting Street',
+                'label' => 'Nearest Intersecting Street',
             ],
         ]);
         
@@ -152,21 +150,6 @@ class StreetlampForm extends Form
             ],
         ]);
         
-//         $this->add([
-//             'name' => 'DATE_MODIFIED',
-//             'type' => Text::class,
-//             'attributes' => [
-//                 'class' => 'form-control',
-//                 'id' => 'DATE_MODIFIED',
-//                 'required' => 'true',
-//                 'placeholder' => '',
-//                 'value' => $today,
-//             ],
-//             'options' => [
-//                 'label' => 'Date Modified',
-//             ],
-//         ]);
-        
         $this->add(new Csrf('SECURITY'));
         
         $this->add([
@@ -182,6 +165,8 @@ class StreetlampForm extends Form
 
     public function getSelectValueOptions($table = null, $id_col = null, $val_col = null)
     {
+        $options = [];
+        
         $sql = new Sql($this->adapter);
         
         $select = new SqlSelect();
