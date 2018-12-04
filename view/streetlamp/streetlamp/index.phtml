@@ -17,7 +17,7 @@
 				<td><a href=<?php echo $this->url('streetlamp', ['action' => 'update','uuid' => $lamp['UUID']]); ?>><?=$lamp['POLE_NUMBER']?></a></td>
 				<td><?=$lamp['STREET']?></td>
 				<td><?=$lamp['INTERSECTING_STREET']?></td>
-				<td><?=$lamp['DATE_CREATED']?></td>
+				<td><?=$lamp['DATE_RECEIVED']?></td>
 				<td><?=$lamp['DATE_MODIFIED']?></td>
 				<td><a class="btn btn-danger" href=<?php echo $this->url('streetlamp', ['action' => 'delete','uuid' => $lamp['UUID']]); ?>>Delete</a></td>
 			</tr>

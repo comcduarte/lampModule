@@ -136,17 +136,17 @@ class StreetlampForm extends Form
         ]);
         
         $this->add([
-            'name' => 'DATE_CREATED',
+            'name' => 'DATE_RECEIVED',
             'type' => Hidden::class,
             'attributes' => [
                 'class' => 'form-control',
-                'id' => 'DATE_CREATED',
+                'id' => 'DATE_RECEIVED',
                 'required' => 'true',
                 'placeholder' => '',
                 'value' => $today,
             ],
             'options' => [
-                'label' => 'Date Created',
+                'label' => 'Date Received',
             ],
         ]);
         
