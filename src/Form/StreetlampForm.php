@@ -9,18 +9,18 @@ use Zend\Form\Element\Submit;
 use Zend\Form\Element\Text;
 use Zend\Db\Sql\Sql as Sql;
 use Zend\Db\Sql\Select as SqlSelect;
-use Midnet\Traits\AdapterTrait;
 use Zend\Form\Element\Select;
 use Zend\Stdlib\Exception\RuntimeException;
 use Zend\Form\Element\Textarea;
+use Zend\Db\Adapter\AdapterAwareTrait;
 
 class StreetlampForm extends Form
 {
-    use AdapterTrait;
+    use AdapterAwareTrait;
     
     public function __construct($name = null, $dbAdapter = null)
     {
-        $this->setAdapter($dbAdapter);
+        $this->setDbAdapter($dbAdapter);
         
         $uuid = new Uuid();
         $date = new \DateTime('now',new \DateTimeZone('EDT'));

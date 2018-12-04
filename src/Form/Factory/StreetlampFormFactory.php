@@ -10,7 +10,7 @@ class StreetlampFormFactory implements FactoryInterface
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
         $form = new StreetlampForm();
-        $form->setAdapter($container->get('streetlamp-model-primary-adapter'));
+        $form->setDbAdapter($container->get('streetlamp-model-primary-adapter'));
         return $form;
     }
 }

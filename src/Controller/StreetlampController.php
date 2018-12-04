@@ -1,14 +1,14 @@
 <?php 
 namespace Streetlamp\Controller;
 
-use Midnet\Traits\AdapterTrait;
 use Streetlamp\Form\StreetlampForm;
 use Streetlamp\Model\StreetlampModel;
+use Zend\Db\Adapter\AdapterAwareTrait;
 use Zend\Mvc\Controller\AbstractActionController;
 
 class StreetlampController extends AbstractActionController
 {
-    use AdapterTrait;
+    use AdapterAwareTrait;
     
     public function indexAction()
     {
