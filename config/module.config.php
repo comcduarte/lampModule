@@ -43,20 +43,9 @@ return [
     'navigation' => [
         'default' => [
             [
-                'label' => 'Street Lamp',
+                'label' => 'Create New Street Lamp',
                 'route' => 'streetlamp',
-                'pages' => [
-                    [
-                        'label' => 'Create New Street Lamp',
-                        'route' => 'streetlamp',
-                        'action' => 'create',
-                    ],
-                    [
-                        'label' => 'List Street Lamps',
-                        'route' => 'streetlamp',
-                        'action' => 'index',
-                    ],
-                ],
+                'action' => 'create',
             ],
         ],
     ],

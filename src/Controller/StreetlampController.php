@@ -12,6 +12,8 @@ class StreetlampController extends AbstractActionController
     
     public function indexAction()
     {
+        return $this->redirect()->toRoute('streetlamp', ['action' => 'create'] );
+        
         $streetlamp = new StreetlampModel($this->adapter);
         $streetlamps = $streetlamp->fetchAll();
         
