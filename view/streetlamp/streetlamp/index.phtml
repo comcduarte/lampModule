@@ -1,1 +1,28 @@
-<H1>welcome to Street Lamp Module</H1>
+<div class="container">
+	<!-- Add News: WYSIWYG Edior -->
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Pole</th>
+				<th>Street</th>
+				<th>Intersecting Street</th>
+				<th>Created</th>
+				<th>Modified</th>
+				<th />
+			</tr>
+		</thead>
+		<tbody>
+		<?php foreach ($streetlamps as $lamp) : ?>
+			<tr>
+				<td><a href=<?php echo $this->url('streetlamp', ['action' => 'update','uuid' => $lamp['UUID']]); ?>><?=$lamp['POLE_NUMBER']?></a></td>
+				<td><?=$lamp['STREET']?></td>
+				<td><?=$lamp['INTERSECTING_STREET']?></td>
+				<td><?=$lamp['DATE_RECEIVED']?></td>
+				<td><?=$lamp['DATE_MODIFIED']?></td>
+				<td><a class="btn btn-danger" href=<?php echo $this->url('streetlamp', ['action' => 'delete','uuid' => $lamp['UUID']]); ?>>Delete</a></td>
+			</tr>
+		<?php endforeach; ?>
+		</tbody>
+	</table>
+	<!-- / Add News: WYSIWYG Edior -->
+</div>

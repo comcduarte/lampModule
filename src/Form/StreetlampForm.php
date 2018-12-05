@@ -7,14 +7,24 @@ use Zend\Form\Element\Csrf;
 use Zend\Form\Element\Hidden;
 use Zend\Form\Element\Submit;
 use Zend\Form\Element\Text;
+use Zend\Db\Sql\Sql as Sql;
+use Zend\Db\Sql\Select as SqlSelect;
+use Zend\Form\Element\Select;
+use Zend\Stdlib\Exception\RuntimeException;
+use Zend\Form\Element\Textarea;
+use Zend\Db\Adapter\AdapterAwareTrait;
 
 class StreetlampForm extends Form
 {
-    public function __construct($name = null)
+    use AdapterAwareTrait;
+    
+    public function __construct($name = null, $dbAdapter = null)
     {
+        $this->setDbAdapter($dbAdapter);
+        
         $uuid = new Uuid();
         $date = new \DateTime('now',new \DateTimeZone('EDT'));
-        $today = $date->format('Y-m-d H:m:s');
+        $today = $date->format('Y-m-d H:i:s');
         parent::__construct($uuid->value);
         
         $this->add([
@@ -27,32 +37,116 @@ class StreetlampForm extends Form
         ]);
         
         $this->add([
-            'name' => 'DATE_CREATED',
+            'name' => 'POLE_NUMBER',
             'type' => Text::class,
             'attributes' => [
                 'class' => 'form-control',
-                'id' => 'DATE_CREATED',
-                'required' => 'true',
+                'id' => 'POLE_NUMBER',
                 'placeholder' => '',
-                'value' => $today,
             ],
             'options' => [
-                'label' => 'Date Created',
+                'label' => 'Pole Number',
             ],
         ]);
         
         $this->add([
-            'name' => 'DATE_MODIFIED',
+            'name' => 'HOUSE_NUMBER',
             'type' => Text::class,
             'attributes' => [
                 'class' => 'form-control',
-                'id' => 'DATE_MODIFIED',
+                'id' => 'HOUSE_NUMBER',
+                'placeholder' => '',
+            ],
+            'options' => [
+                'label' => 'House Number',
+            ],
+        ]);
+        
+        $this->add([
+            'name' => 'STREET',
+            'type' => Text::class,
+            'attributes' => [
+                'class' => 'form-control',
+                'id' => 'STREET',
+                'required' => 'true',
+                'placeholder' => '',
+            ],
+            'options' => [
+                'label' => 'Street',
+            ],
+        ]);
+        
+        $this->add([
+            'name' => 'INTERSECTING_STREET',
+            'type' => Text::class,
+            'attributes' => [
+                'class' => 'form-control',
+                'id' => 'INTERSECTING_STREET',
+                'required' => 'true',
+                'placeholder' => '',
+            ],
+            'options' => [
+                'label' => 'Nearest Intersecting Street',
+            ],
+        ]);
+        
+        $value_options = $this->getSelectValueOptions('actions','ACTION','ACTION');
+        
+        $this->add([
+            'name' => 'ACTION',
+            'type' => Select::class,
+            'attributes' => [
+                'class' => 'form-control',
+                'id' => 'ACTION',
+                'required' => 'true',
+                'placeholder' => '',
+            ],
+            'options' => [
+                'label' => 'Action',
+                'value_options' => $value_options,
+            ],
+        ]);
+        
+        $this->add([
+            'name' => 'DESCRIPTION',
+            'type' => Textarea::class,
+            'attributes' => [
+                'class' => 'form-control',
+                'id' => 'DESCRIPTION',
+                'required' => 'true',
+                'placeholder' => '',
+            ],
+            'options' => [
+                'label' => 'Description',
+            ],
+        ]);
+        
+        $this->add([
+            'name' => 'PHONE_NUMBER',
+            'type' => Text::class,
+            'attributes' => [
+                'class' => 'form-control',
+                'id' => 'PHONE_NUMBER',
+                'required' => 'true',
+                'placeholder' => '',
+            ],
+            'options' => [
+                'label' => 'Phone Number',
+            ],
+        ]);
+        
+        $this->add([
+            'name' => 'DATE_RECEIVED',
+            'type' => Hidden::class,
+            'attributes' => [
+                'class' => 'form-control',
+                'id' => 'DATE_RECEIVED',
                 'required' => 'true',
                 'placeholder' => '',
                 'value' => $today,
             ],
             'options' => [
-                'label' => 'Date Modified',
+                'label' => 'Date Received',
             ],
         ]);
         
@@ -67,5 +161,30 @@ class StreetlampForm extends Form
                 'id' => 'SUBMIT',
             ],
         ]);
+    }
+
+    public function getSelectValueOptions($table = null, $id_col = null, $val_col = null)
+    {
+        $options = [];
+        
+        $sql = new Sql($this->adapter);
+        
+        $select = new SqlSelect();
+        $select->from($table);
+        $select->columns([$id_col => $id_col, $val_col => $val_col]);
+        
+        $statement = $sql->prepareStatementForSqlObject($select);
+        
+        try {
+            $resultSet = $statement->execute();
+        } catch (RuntimeException $e) {
+            return $e;
+        }
+        
+        foreach ($resultSet as $id => $object) {
+            $options[$object[$id_col]] = $object[$val_col];
+        }
+        
+        return $options;
     }
 }

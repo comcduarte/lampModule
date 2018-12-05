@@ -24,6 +24,14 @@ return [
             ],
         ],
     ],
+    'acl' => [
+        'guest' => [
+            'streetlamp' => ['create', 'accept'],
+        ],
+        'member' => [
+            'streetlamp' => ['index', 'create', 'update', 'delete'],
+        ],
+    ],
     'controllers' => [
         'factories' => [
             StreetlampController::class => StreetlampControllerFactory::class,
@@ -35,21 +43,9 @@ return [
     'navigation' => [
         'default' => [
             [
-                'label' => 'Street Lamp',
+                'label' => 'Create New Street Lamp',
                 'route' => 'streetlamp',
-                'pages' => [
-                    [
-                        'label' => 'Create New Street Lamp',
-                        'route' => 'streetlamp',
-                        'controller' => 'streetlamp',
-                        'action' => 'create',
-                    ],
-                    [
-                        'label' => 'List Street Lamps',
-                        'route' => 'streetlamp',
-                        'action' => 'index',
-                    ],
-                ],
+                'action' => 'create',
             ],
         ],
     ],

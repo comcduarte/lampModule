@@ -1,0 +1,9 @@
+<?php 
+$title = "Update Lamp Repair Request";
+$this->headtitle($title);
+
+$form->setAttribute('action', $this->url('streetlamp', ['controller' => 'streetlamp', 'action' => 'update', 'uuid' => $this->uuid]));
+$form->prepare();
+
+echo $this->partial('streetlamp/partial/streetlampform.phtml', ['title' => $title, 'form' => $form, 'uuid' => $this->uuid]);
+?>
